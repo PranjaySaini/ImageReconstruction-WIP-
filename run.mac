@@ -1,0 +1,5 @@
+/run/numberOfThreads 16
+/run/initialize
+/control/execute vis.mac
+/gun/particle geantino
+/run/beamOn 1000
