@@ -1,5 +1,12 @@
 /run/numberOfThreads 16
+
 /run/initialize
-/control/execute vis.mac
-/gun/particle geantino
-/run/beamOn 1000
+/process/had/rdm/thresholdForVeryLongDecayTime 1e+50 year
+
+/run/setNbins 1000
+/control/execute cs137.mac
+/run/beamOn 10000000
+
+/run/setNbins 1000
+/control/execute co60.mac
+/run/beamOn 10000000

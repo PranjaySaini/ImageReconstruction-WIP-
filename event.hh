@@ -6,7 +6,11 @@
 #include "G4AnalysisManager.hh"
 #include "run.hh"
 #include "detector.hh"
+#include "stepping.hh"
 #include <map>
+#include <vector>
+#include <utility> // for std::pair
+#include "G4THitsMap.hh"
 
 class EventAction : public G4UserEventAction
 {
@@ -14,18 +18,12 @@ public:
     EventAction(RunAction*);
     ~EventAction();
     
-    virtual void BeginOfEventAction(const G4Event*);
-    virtual void EndOfEventAction(const G4Event*);
-    void AddEdep(G4int, G4double);
-
-
-    const std::map<G4int, G4double>& GetEdepMap() const { return fEdepMap; }
+    virtual void BeginOfEventAction(const G4Event*) override; 
+    virtual void EndOfEventAction(const G4Event*) override;
     
 private:
-    std::map<G4int, G4double> fEdepMap;
-
+	G4int fPrintModulo;
 };
 
 #endif
-
 

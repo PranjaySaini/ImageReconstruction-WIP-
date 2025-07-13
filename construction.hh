@@ -20,9 +20,23 @@
 #include "G4PhysicalConstants.hh"
 #include "G4OpticalSurface.hh"
 #include "G4LogicalSkinSurface.hh"
+#include "G4ProductionCuts.hh"
+#include "G4ProductionCutsTable.hh"
+#include "G4TransportationManager.hh"
+#include"G4GeometryManager.hh"
 #include "detector.hh"
+#include "G4UserLimits.hh"
+#include "G4ScoringManager.hh"
+#include "G4VScoringMesh.hh"
+#include "G4Box.hh"
+#include "G4MultiFunctionalDetector.hh"
+#include "G4SDManager.hh"
+#include "G4PSEnergyDeposit.hh"
+#include "G4LogicalBorderSurface.hh"
 #include <cstdlib>
 #include <ctime>
+#include "G4VisAttributes.hh"
+
 
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
@@ -30,34 +44,26 @@ public:
 	DetectorConstruction();
 	~DetectorConstruction();
 	
-	G4LogicalVolume *GetScoringVolume() const {return fScoringVolume;}
 	virtual G4VPhysicalVolume *Construct();
-	void CreateDetectorGrid();
-	void CreateDetector();
 	G4int GetNumberOfDetectors() const;
+        
+
 	
 private:
-        G4LogicalVolume *fScoringVolume;
-        G4GenericMessenger *fMessenger;
-        G4bool createHole, createTarget, createTube, createDetector, createDetectorGrid, createShield;
-	virtual void ConstructSDandField();
 	void DefineMaterials();
 	void CreateWorld();
-	void CreateShield();
-	void CreateTarget();
-	void CreateShieldWithHole();
-
 	void CreateScintillator();
-	void CreateScintillatorGrid();
-	void CreateXRayTube();
-	G4SubtractionSolid* finalShield;
-	G4Material *worldMat, *shieldMat, *targetMat, *tubeMat, *NaI, *Pb;
-	G4Element *Na, *I; //*Pb
-	G4double worldX, worldY, worldZ, shieldThickness;
-	G4Box *solidWorld, *solidShield, *solidTarget, *emptyHole, *solidDetector, *solidTube, *solidScin;
-	G4LogicalVolume *logicWorld, *logicShield, *logicTarget, *logicDetector, *logicTube, *logicScin;
-	G4VPhysicalVolume *physWorld, *physShield, *physTarget, *physDetector, *physTube, *physScin;
+        void ConstructSDandField();
+        void CreateScintillatorGrid();
+        G4bool createDetector, createDetectorGrid; 
+	G4Material *worldMat, *NaI;
+	G4Element *Na, *I; 
+	G4double worldX, worldY, worldZ;
+	G4Box *solidWorld, *solidScin;
+	G4LogicalVolume *logicWorld, *logicScin;
+	G4VPhysicalVolume *physWorld, *physScin;
 	G4OpticalSurface *mirrorSurface;
+	G4GenericMessenger *fMessenger;
 };
 
 #endif

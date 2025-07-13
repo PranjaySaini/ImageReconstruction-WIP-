@@ -15,6 +15,9 @@ public:
     
       virtual void BuildForMaster() const;    
       virtual void Build() const;
+      
+private:
 };
 
 #endif
+

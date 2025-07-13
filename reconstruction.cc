@@ -6,14 +6,16 @@
 #include "physics.hh"
 #include "construction.hh"
 #include "action.hh"
-//#include "G4ScoringManager.hh"
 
 int main(int argc, char** argv){
 
 G4MTRunManager *runManager = new G4MTRunManager();
 runManager->SetUserInitialization(new PhysicsList());
-runManager->SetUserInitialization(new DetectorConstruction());
 runManager->SetUserInitialization(new ActionInitialization());
+
+runManager->SetUserInitialization(new DetectorConstruction());
+
+G4ScoringManager::GetScoringManager();
 
 G4UIExecutive *UI = 0;
 

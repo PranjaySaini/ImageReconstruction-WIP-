@@ -1,6 +1,7 @@
 #ifndef GENERATOR_HH
 #define GENERATOR_HH
 
+#include "G4GeneralParticleSource.hh"
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "G4ParticleGun.hh"
 #include "G4SystemOfUnits.hh"
@@ -18,12 +19,12 @@ public:
     PrimaryGenerator();
     ~PrimaryGenerator();
 
-    virtual void GeneratePrimaries(G4Event*);
-    
+    virtual void GeneratePrimaries(G4Event *anEvent);
+
 private:
-    
-    G4ParticleGun *fParticleGun;
+    G4GeneralParticleSource *fParticleSourceCs137;
 };
+
 
 #endif
 
