@@ -11,6 +11,7 @@ RunAction::~RunAction()
 {
 	delete fMessenger;
 	delete timer;
+	
 }
 
 void RunAction::BeginOfRunAction(const G4Run* run)
@@ -54,7 +55,7 @@ csvBuffer << "\n";  // End of header
     }
 }
 
-void RunAction::EndOfRunAction(const G4Run*)
+void RunAction::EndOfRunAction(const G4Run* run)
 {  
     timer->Stop();
     G4cout << "=== Run time: " << timer->GetRealElapsed() << " s ===" << G4endl;
@@ -66,7 +67,17 @@ void RunAction::EndOfRunAction(const G4Run*)
     if (csvFile.is_open()) {
     csvFile << csvBuffer.str();  // Write the entire buffer to the file in one operation
     csvFile.close();  // Close the file
+    
 }
+
+    G4int runID = run->GetRunID();
+    std::stringstream strRunID;
+    strRunID << runID;
+	
+if (G4Threading::IsMasterThread()) {
+    system(("cd .. && python3 poop.py " + strRunID.str()).c_str());
+}
+
 }
 
 G4int RunAction::GetNumberOfDetectors()

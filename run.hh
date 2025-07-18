@@ -15,10 +15,12 @@
 #include "construction.hh"
 #include "G4ScoringManager.hh"
 #include "G4VScoringMesh.hh"
+#include "G4Threading.hh"
 #include <vector>
 #include <fstream>
 #include <sstream>
 #include <filesystem>
+#include <cstdlib>
 #include "G4Timer.hh"
 
 class RunMessenger;
